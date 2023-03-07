@@ -333,7 +333,10 @@ open class PagingViewController<T: PagingItem>:
   
   /// Reload the data for the menu items. This method will not reload
   /// the view controllers.
-  open func reloadMenu() {
+  open func reloadMenu(refreshSizeCache: Bool = false) {
+    if refreshSizeCache {
+        collectionViewLayout.sizeCache?.clear()
+    }
     let previouslySelected = state.currentPagingItem
     let items = generateItemsForIndexedDataSource()
     indexedDataSource?.items = items
